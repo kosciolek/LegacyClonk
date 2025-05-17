@@ -51,28 +51,6 @@ parts = [
 
 [groups.content.'Worlds.c4f']
 
-[matrix.windows]
-runner = 'windows-latest'
-
-[[matrix.windows.config]]
-arch = 'x86'
-platform-suffix = 'win32'
-itch-manifest = 'win32'
-
-[[matrix.windows.config]]
-arch = 'x64'
-platform-suffix = 'win64'
-itch-manifest = 'win64'
-vs_arch = 'amd64'
-include-groups = true
-publish-groups = true
-
-[[matrix.windows.config]]
-name = 'debugrec'
-arch = 'x86'
-platform-suffix = 'win32'
-debugrec = true
-
 [matrix.linux]
 runner = 'ubuntu-20.04'
 
@@ -86,11 +64,3 @@ name = 'debugrec'
 arch = 'x64'
 platform-suffix = 'linux64'
 debugrec = true
-
-[matrix.mac]
-runner = 'macos-13'
-
-[[matrix.mac.config]]
-arch = 'x64'
-platform-suffix = 'mac'
-itch-manifest = 'mac'
