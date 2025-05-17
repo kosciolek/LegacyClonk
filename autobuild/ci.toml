@@ -52,7 +52,7 @@ parts = [
 [groups.content.'Worlds.c4f']
 
 [matrix.linux]
-runner = 'ubuntu-20.04'
+runner = 'ubuntu-24.04'
 
 [[matrix.linux.config]]
 arch = 'x64'
