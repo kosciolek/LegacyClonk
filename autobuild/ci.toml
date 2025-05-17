@@ -58,9 +58,3 @@ runner = 'ubuntu-24.04'
 arch = 'x64'
 platform-suffix = 'linux64'
 itch-manifest = 'linux'
-
-[[matrix.linux.config]]
-name = 'debugrec'
-arch = 'x64'
-platform-suffix = 'linux64'
-debugrec = true
