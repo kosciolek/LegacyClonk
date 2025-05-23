@@ -1,8 +1,5 @@
 name: Release
-on:
-  push:
-    tags:
-      - '*'
+on: push
 
 defaults:
   run:
@@ -15,12 +12,12 @@ concurrency:
 jobs:
   generate-ci-config:
     name: Generate CI Configuration
-    uses: './.github/workflows/ci-config.yml'
+    uses: "./.github/workflows/ci-config.yml"
 
   build-binaries:
     name: Build Binaries
     needs: [generate-ci-config]
-    uses: './.github/workflows/build.yml'
+    uses: "./.github/workflows/build.yml"
     with:
       matrix: ${{ needs.generate-ci-config.outputs.matrix }}
       pack-engine-and-c4group: true
@@ -140,7 +137,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
-           autobuild
+            autobuild
       - uses: actions/download-artifact@v4
         with:
           name: clonk-${{ matrix.config-suffix }}
@@ -149,7 +146,7 @@ jobs:
           name: c4group-${{ matrix.config-suffix }}
       - uses: actions/download-artifact@v4
         with:
-          pattern: '*.c4g'
+          pattern: "*.c4g"
           merge-multiple: true
       - uses: actions/download-artifact@v4
         with:
@@ -239,7 +236,7 @@ jobs:
           name: c4group-${{ matrix.config-suffix }}
       - uses: actions/download-artifact@v4
         with:
-          pattern: '*.c4g.c4u'
+          pattern: "*.c4g.c4u"
           merge-multiple: true
       - uses: actions/download-artifact@v4
         with:
@@ -319,15 +316,14 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: '*.c4g'
+          pattern: "*.c4g"
           merge-multiple: true
       - uses: actions/download-artifact@v4
         with:
           name: content
 
       - name: Move Licenses
-        run:
-          Move-Item -Path licenses/* -Include @('clonk_content_license.txt', 'clonk_trademark_license.txt') -Destination .
+        run: Move-Item -Path licenses/* -Include @('clonk_content_license.txt', 'clonk_trademark_license.txt') -Destination .
 
       - name: Build Installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
