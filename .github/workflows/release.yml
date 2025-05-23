@@ -1,5 +1,8 @@
 name: Release
-on: push
+on:
+  push:
+    tags:
+      - "*"
 
 defaults:
   run:
@@ -445,49 +448,3 @@ jobs:
           artifactErrorsFailBuild: true
           replacesArtifacts: true
           generateReleaseNotes: true
-
-  publish-itch:
-    name: Publish To Itch.io
-    runs-on: ${{ matrix.runner }}
-    needs: [generate-ci-config, publish-github]
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJson(needs.generate-ci-config.outputs.matrix-itch) }}
-    env:
-      BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-      MAJOR_UPDATE: ${{ needs.generate-ci-config.outputs.major-update }}
-      OBJVERSION: ${{ needs.generate-ci-config.outputs.objversion }}
-      OBJVERSIONNODOTS: ${{ needs.generate-ci-config.outputs.objversionnodots }}
-      VERSION: ${{ needs.generate-ci-config.outputs.buildversion }}
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            autobuild
-      - uses: actions/download-artifact@v4
-        if: ${{ matrix.os != 'Linux' }}
-        with:
-          name: lc_full_${{ env.VERSION }}_${{ matrix.platform-suffix }}.zip
-          path: lc_full
-      - uses: actions/download-artifact@v4
-        if: ${{ matrix.os == 'Linux' }}
-        with:
-          name: lc_full_${{ env.VERSION }}_${{ matrix.platform-suffix }}.tar.gz
-
-      - name: "Linux: Uncompress Tarball"
-        if: ${{ matrix.os == 'Linux' }}
-        run: |
-          mkdir lc_full
-          cd lc_full
-          tar xzf ../lc_full_${{ env.VERSION }}_${{ matrix.platform-suffix }}.tar.gz
-
-      - name: Publish To Itch
-        run: >
-          autobuild/PublishToItch.ps1
-          -OS ${{ matrix.os }}
-          -Arch ${{ matrix.arch }}
-          -PlatformSuffix ${{ matrix.platform-suffix }}
-          -Manifest autobuild/itch/${{ matrix.itch-manifest }}.toml
-          -Tag ${{ github.ref_name }}
