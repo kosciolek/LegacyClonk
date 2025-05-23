@@ -86,11 +86,3 @@ name = 'debugrec'
 arch = 'x64'
 platform-suffix = 'linux64'
 debugrec = true
-
-[matrix.mac]
-runner = 'macos-13'
-
-[[matrix.mac.config]]
-arch = 'x64'
-platform-suffix = 'mac'
-itch-manifest = 'mac'
