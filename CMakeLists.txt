@@ -68,7 +68,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 option(DEBUGREC "Write additional debug control to records" OFF)
 option(SOLIDMASK_DEBUG "Solid mask debugging" OFF)
-option(USE_CONSOLE "Dedicated server mode (compile as pure console application)" ON)
+option(USE_CONSOLE "Dedicated server mode (compile as pure console application)" OFF)
 option(USE_LTO "Enable Link Time Optimization" ON)
 option(USE_PCH "Precompile Headers" ON)
 option(USE_STAT "Enable internal performance statistics for developers" OFF)

@@ -62,7 +62,7 @@ jobs:
 
       - name: Configure
         run: |
-          $CHROOT cmake -B build . -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DUSE_TESTS=On -DCMAKE_CTEST_ARGUMENTS=--output-on-failure $CMAKE_CONFIGURE_ARGS
+          $CHROOT cmake -B build . -DUSE_CONSOLE=On -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DUSE_TESTS=On -DCMAKE_CTEST_ARGUMENTS=--output-on-failure $CMAKE_CONFIGURE_ARGS
 
       - name: "Enable Debugrec"
         if: ${{ matrix.debugrec }}
@@ -76,7 +76,7 @@ jobs:
 
       - name: Build
         run: |
-          $CHROOT cmake --build build $CMAKE_BUILD_ARGS
+          $CHROOT cmake --build build -DUSE_CONSOLE=On $CMAKE_BUILD_ARGS
 
       - name: Test
         run: |
