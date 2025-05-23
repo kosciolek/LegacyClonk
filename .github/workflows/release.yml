@@ -40,7 +40,7 @@ jobs:
             autobuild
       - uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository_owner }}/content
+          repository: LegacyClonk/content
           path: content
 
       - uses: actions/download-artifact@v4
