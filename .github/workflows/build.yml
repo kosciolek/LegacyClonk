@@ -104,7 +104,7 @@ jobs:
       - name: "Linux: Create AppImage"
         if: ${{ matrix.os == 'Linux' }}
         env:
-          DEPLOY_GTK_VERSION: 4
+          DEPLOY_GTK_VERSION: 3
         run: |
           tools/make_AppImage.sh
           mv output/clonk.AppImage output/clonk
